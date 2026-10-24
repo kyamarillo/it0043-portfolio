@@ -1,10 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    // ==========================================
-    // 1. NAVIGATION TOGGLE
-    // ==========================================
-
     const menuButton = document.querySelector("#menu-button");
     const navigationMenu = document.querySelector("#navigation-menu");
 
@@ -22,11 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     }
-
-
-    // ==========================================
-    // 2. DARK MODE
-    // ==========================================
 
     const themeToggle = document.querySelector("#theme-toggle");
     const html = document.documentElement;
@@ -58,11 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         updateThemeButton();
     }
-
-
-    // ==========================================
-    // 3. DYNAMIC PROJECT CONTENT
-    // ==========================================
 
     const projects = [
         {
@@ -126,11 +112,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-
-    // ==========================================
-    // 4. CONTACT FORM VALIDATION
-    // ==========================================
-
     const contactForm = document.querySelector("#contact-form");
 
     if (contactForm) {
@@ -148,7 +129,6 @@ document.addEventListener("DOMContentLoaded", function () {
             { input: messageInput, error: messageError }
         ];
 
-        // Ensure required elements exist before validating.
         const formElementsExist = fields.every(function (field) {
             return field.input && field.error;
         });
@@ -157,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
             contactForm.addEventListener("submit", function (event) {
                 event.preventDefault();
 
-                // Clear previous errors.
+
                 fields.forEach(function (field) {
                     field.error.textContent = "";
                     field.input.removeAttribute("aria-invalid");
@@ -165,14 +145,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 let isValid = true;
 
-                // Validate name.
                 if (nameInput.value.trim() === "") {
                     nameError.textContent = "Please enter your name.";
                     nameInput.setAttribute("aria-invalid", "true");
                     isValid = false;
                 }
 
-                // Validate email.
                 const emailValue = emailInput.value.trim();
                 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -187,14 +165,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     isValid = false;
                 }
 
-                // Validate message.
                 if (messageInput.value.trim() === "") {
                     messageError.textContent = "Please enter your message.";
                     messageInput.setAttribute("aria-invalid", "true");
                     isValid = false;
                 }
 
-                // Stop if any field is invalid.
                 if (!isValid) {
                     const firstInvalidField = fields.find(function (field) {
                         return field.input.getAttribute("aria-invalid") === "true";
@@ -207,7 +183,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     return;
                 }
 
-                // Validation succeeded, but no message is sent.
                 alert(
                     "Your information is valid, but your message has not been sent. Please connect a submission service."
                 );
