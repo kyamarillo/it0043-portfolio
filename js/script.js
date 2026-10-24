@@ -1,0 +1,134 @@
+const menuButton = document.querySelector("#menu-button");
+const navigationMenu = document.querySelector("#navigation-menu");
+
+if (menuButton && navigationMenu) {
+  menuButton.addEventListener("click", function () {
+    const isOpen = navigationMenu.classList.toggle("show");
+
+    menuButton.setAttribute("aria-expanded", isOpen);
+  });
+
+  navigationMenu.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      navigationMenu.classList.remove("show");
+      menuButton.setAttribute("aria-expanded", "false");
+    });
+  });
+}
+
+const themeButton = document.querySelector("#theme-button");
+
+if (themeButton) {
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+  }
+
+  themeButton.addEventListener("click", function () {
+    document.body.classList.toggle("dark-mode");
+
+    const currentTheme = document.body.classList.contains("dark-mode")
+      ? "dark"
+      : "light";
+
+    localStorage.setItem("theme", currentTheme);
+  });
+}
+
+const projects = [
+  {
+    title: "Portfolio Website",
+    description: "A personal website created using HTML and CSS.",
+    category: "Web Design"
+  },
+  {
+    title: "Digital Illustration",
+    description: "An original illustration created as an art project.",
+    category: "Illustration"
+  },
+  {
+    title: "Animation Project",
+    description: "A short animation exploring movement and timing.",
+    category: "Animation"
+  }
+];
+
+const projectContainer = document.querySelector("#project-container");
+
+if (projectContainer) {
+  projectContainer.replaceChildren();
+
+  if (projects.length === 0) {
+    projectContainer.textContent = "No projects available yet.";
+  } else {
+    projects.forEach(function (project) {
+      if (!project.title || !project.description || !project.category) {
+        return;
+      }
+
+      const projectCard = document.createElement("article");
+      const projectTitle = document.createElement("h3");
+      const projectDescription = document.createElement("p");
+      const projectCategory = document.createElement("p");
+
+      projectTitle.textContent = project.title;
+      projectDescription.textContent = project.description;
+      projectCategory.textContent = "Category: " + project.category;
+
+      projectCard.append(
+        projectTitle,
+        projectDescription,
+        projectCategory
+      );
+
+      projectContainer.appendChild(projectCard);
+    });
+  }
+}
+
+
+const contactForm = document.querySelector("#contact-form");
+
+if (contactForm) {
+  contactForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const nameInput = document.querySelector("#name");
+    const emailInput = document.querySelector("#email");
+    const messageInput = document.querySelector("#message");
+
+    const nameError = document.querySelector("#name-error");
+    const emailError = document.querySelector("#email-error");
+    const messageError = document.querySelector("#message-error");
+
+    nameError.textContent = "";
+    emailError.textContent = "";
+    messageError.textContent = "";
+
+    let isValid = true;
+
+    if (nameInput.value.trim() === "") {
+      nameError.textContent = "Please enter your name.";
+      isValid = false;
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(emailInput.value.trim())) {
+      emailError.textContent = "Please enter a valid email address.";
+      isValid = false;
+    }
+
+    if (messageInput.value.trim() === "") {
+      messageError.textContent = "Please enter your message.";
+      isValid = false;
+    }
+
+    if (!isValid) {
+      return;
+    }
+
+    alert("Your information is valid, but the message has not been sent. Please connect a submission service.");
+  });
+}

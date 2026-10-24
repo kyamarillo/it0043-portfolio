@@ -1,0 +1,251 @@
+:root {
+    color-scheme: light;
+
+    --color-background: #F1F5F9;
+    --color-surface: #FFFFFF;
+    --color-text: #0F172A;
+    --color-muted: #475569;
+    --color-accent: #2563EB;
+    --color-accent-hover: #1D4ED8;
+    --color-border: #CBD5E1;
+
+}
+
+[data-theme="dark"] 
+:root {
+    color-scheme: dark;
+
+    --color-background: #050B18;
+    --color-surface: #101C30;
+    --color-text: #F1F5F9;
+    --color-muted: #94A3B8;
+    --color-accent: #60A5FA;
+    --color-accent-hover: #93C5FD;
+    --color-border: #334155;
+}
+
+:root {
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 1rem;
+    --space-4: 1.5rem;
+    --space-5: 2rem;
+
+    --text-small: 0.875rem;
+    --text-body: 1rem;
+    --text-large: 1.5rem;
+    --text-title: 2.5rem;
+}
+
+body 
+{
+    margin: 0;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: Arial, sans-serif;
+    font-size: var(--text-body);
+    line-height: 1.6;
+}
+
+main {
+    width: 100%;
+    max-width: 1000px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: clamp(1rem, 4vw, 2rem);
+}
+
+h1 {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+}
+
+h2 {
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+}
+
+p {
+    overflow-wrap: anywhere;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+}
+
+nav a {
+    display: inline-block;
+    padding: var(--space-2) var(--space-3);
+}
+
+nav a:hover 
+{
+    color: var(--color-accent);
+    background-color: #292929;
+}
+
+nav a:focus 
+{
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+}
+
+.card 
+{
+    background-color: var(--color-surface);
+    padding: var(--space-4);
+    margin-bottom: var(--space-4);
+    border-radius: 8px;
+}
+
+.button 
+{
+    display: inline-block;
+    padding: var(--space-2) var(--space-4);
+    background-color: var(--color-accent);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.button:hover 
+{
+    opacity: 0.8;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    overflow-wrap: anywhere;
+}
+
+table 
+{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--space-4);
+}
+
+caption 
+{
+    text-align: left;
+    font-size: var(--text-large);
+    margin-bottom: var(--space-3);
+}
+
+th,
+td 
+{
+    padding: var(--space-3);
+    border-bottom: 1px solid #444;
+    text-align: left;
+}
+
+th 
+{
+    color: var(--color-accent);
+}
+
+footer 
+{
+    padding: var(--space-4);
+    text-align: center;
+    color: var(--color-muted);
+    background-color: var(--color-surface);
+}
+
+@media (max-width: 600px) {
+    main {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0.75rem;
+    }
+
+    nav a {
+        text-align: center;
+        padding: 0.75rem;
+    }
+
+    .card {
+        padding: 1rem;
+    }
+
+    th,
+    td {
+        padding: 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    footer {
+        padding: 1rem;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+    main {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2.1rem;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .card {
+        padding: 1.25rem;
+    }
+}
+
+@media (min-width: 901px) {
+     main {
+        padding: 2rem;
+    }
+
+    nav {
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .card {
+        padding: 1.5rem;
+    }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
