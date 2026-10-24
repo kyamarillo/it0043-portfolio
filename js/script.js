@@ -16,25 +16,40 @@ if (menuButton && navigationMenu) {
   });
 }
 
-const themeButton = document.querySelector("#theme-button");
 
-if (themeButton) {
-  const savedTheme = localStorage.getItem("theme");
+document.addEventListener("DOMContentLoaded", function () {
+    const themeToggle = document.getElementById("theme-toggle");
+    const html = document.documentElement;
 
-  if (savedTheme === "dark") {
-    document.body.classList.add("dark-mode");
-  }
+    // Stop if the button does not exist on this page
+    if (!themeToggle) {
+        return;
+    }
 
-  themeButton.addEventListener("click", function () {
-    document.body.classList.toggle("dark-mode");
+    // Set the initial button label
+    function updateButtonText() {
+        const isDark = html.getAttribute("data-theme") === "dark";
 
-    const currentTheme = document.body.classList.contains("dark-mode")
-      ? "dark"
-      : "light";
+        themeToggle.textContent = isDark
+            ? "Switch to Light Mode"
+            : "Switch to Dark Mode";
+    }
 
-    localStorage.setItem("theme", currentTheme);
-  });
-}
+    // Toggle between light and dark mode
+    themeToggle.addEventListener("click", function () {
+        const isDark = html.getAttribute("data-theme") === "dark";
+
+        if (isDark) {
+            html.removeAttribute("data-theme");
+        } else {
+            html.setAttribute("data-theme", "dark");
+        }
+
+        updateButtonText();
+    });
+
+    updateButtonText();
+});
 
 const projects = [
   {
