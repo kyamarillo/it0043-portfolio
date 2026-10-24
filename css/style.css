@@ -107,6 +107,13 @@ nav {
     cursor: pointer;
 }
 
+nav a[href="#home"],
+nav a[href="#contact"],
+nav a[href="#about"],
+nav a[href="#skills"] {
+  display: none;
+}
+
 nav a {
     display: inline-block;
     padding: var(--space-2) var(--space-3);

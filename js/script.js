@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (menuButton && navigationMenu) {
         menuButton.addEventListener("click", function () {
             const isOpen = navigationMenu.classList.toggle("show");
-
             menuButton.setAttribute("aria-expanded", String(isOpen));
         });
 
@@ -35,16 +34,20 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (themeToggle) {
-        themeToggle.addEventListener("click", function () {
+            themeToggle.addEventListener("click", function () {
             const isDark = html.getAttribute("data-theme") === "dark";
 
             if (isDark) {
-                html.removeAttribute("data-theme");
-            } else {
-                html.setAttribute("data-theme", "dark");
-            }
+             html.removeAttribute("data-theme");
+            localStorage.setItem("theme", "light");
+    } 
+    else 
+    {
+        html.setAttribute("data-theme", "dark");
+        localStorage.setItem("theme", "dark");
+    }
 
-            updateThemeButton();
+        updateThemeButton();
         });
 
         updateThemeButton();
