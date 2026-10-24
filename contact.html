@@ -20,6 +20,23 @@
                 <article>
                     <p>If you would like to get in touch with me, please feel free to reach out via email or connect with me on social media. I am always open to discussing new projects, creative ideas, or opportunities to be part of your visions.</p>
                     <p>Email: <a href="mailto:styxamarillo@example.com">styxamarillo@example.com</a></p>
+                
+                    <form id="contact-form">
+                    <label for="name">Name</label>
+                    <input id="name" name="name" type="text" required>
+                    <span id="name-error"></span>
+
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" required>
+                    <span id="email-error"></span>
+
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                    <span id="message-error"></span>
+
+                    <button type="submit">Submit</button>
+                    </form>
+                    
                 </article>
             </section>
             <button id="menu-button" type="button" aria-expanded="false" aria-controls="navigation-menu">
