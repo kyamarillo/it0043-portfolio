@@ -1,62 +1,60 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | Styx Amarillo</title>
-    <script src="js/settings.js"></script>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/settings.js"></script>
     <script src="js/script.js" defer></script>
 </head>
+<body>
+    <div class="site-controls">
+        <button id="theme-toggle" type="button" aria-pressed="false">Switch to Dark Mode</button>
+        <button id="menu-button" type="button" aria-expanded="false" aria-controls="navigation-menu">Menu</button>
+    </div>
 
-    <body>
-    <button id="theme-toggle" type="button">
-        Switch to Dark Mode
-    </button>
-     <button id="menu-button" type="button" aria-expanded="false" aria-controls="navigation-menu">
-                Menu
-    </button>
+    <nav id="navigation-menu" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="skills.html">Skills</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
 
-            <nav id="navigation-menu">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="skills.html">Skills</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-            
-        <main>
-        <header>
-            <h1>Contact Me</h1>
-        </header>
-            <section>
-                <h2>Get in Touch</h2>
-                <article>
-                <form id="contact-form" novalidate></form>
-                    <p>If you would like to get in touch with me, please feel free to reach out via email or connect with me on social media. I am always open to discussing new projects, creative ideas, or opportunities to be part of your visions.</p>
-                    <p>Email: <a href="mailto:styxamarillo@example.com">styxamarillo@example.com</a></p>
-                
-                    <form id="contact-form">
-                    <label for="name">Name</label>
-                    <input id="name" name="name" type="text" required>
-                    <span id="name-error"></span>
+    <main>
+        <header><h1>Contact Me</h1></header>
+        <section>
+            <h2>Get in Touch</h2>
+            <article>
+                <p>If you would like to get in touch, feel free to reach out by email. I am open to discussing projects, creative ideas, or opportunities.</p>
+                <p>Email: <a href="mailto:styxamarillo@example.com">styxamarillo@example.com</a></p>
 
-                    <label for="email">Email</label>
-                    <input id="email" name="email" type="email" required>
-                    <span id="email-error"></span>
+                <form id="contact-form" novalidate>
+                    <div class="form-field">
+                        <label for="name">Name</label>
+                        <input id="name" name="name" type="text" autocomplete="name" required aria-describedby="name-error">
+                        <span id="name-error" class="field-error"></span>
+                    </div>
 
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" required></textarea>
-                    <span id="message-error"></span>
+                    <div class="form-field">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" autocomplete="email" required aria-describedby="email-error">
+                        <span id="email-error" class="field-error"></span>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required aria-describedby="message-error"></textarea>
+                        <span id="message-error" class="field-error"></span>
+                    </div>
 
                     <button type="submit">Submit</button>
-                    </form>
-                    
-                </article>
-            </section>
-        <footer>
-            @2026 Styx Amarillo
-        </footer>
-        </main>
-    </body>
+                    <p id="form-status" role="status" aria-live="polite"></p>
+                </form>
+            </article>
+        </section>
+        <footer><p>© 2026 Styx Amarillo</p></footer>
+    </main>
+</body>
 </html>

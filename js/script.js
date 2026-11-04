@@ -1,5 +1,9 @@
 
 document.addEventListener("DOMContentLoaded", function () {
+    "use strict";
+
+    const settings = window.portfolioSettings;
+    const html = document.documentElement;
 
     const menuButton = document.querySelector("#menu-button");
     const navigationMenu = document.querySelector("#navigation-menu");
@@ -8,7 +12,10 @@ document.addEventListener("DOMContentLoaded", function () {
         menuButton.addEventListener("click", function () {
             const isOpen = navigationMenu.classList.toggle("show");
 
-            menuButton.setAttribute("aria-expanded", String(isOpen));
+            menuButton.setAttribute(
+                "aria-expanded",
+                String(isOpen)
+            );
         });
 
         navigationMenu.querySelectorAll("a").forEach(function (link) {
@@ -19,9 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // 2. Theme toggle
     const themeToggle = document.querySelector("#theme-toggle");
-    const html = document.documentElement;
-    const settings = window.portfolioSettings;
 
     function updateThemeButton() {
         const isDark = html.getAttribute("data-theme") === "dark";
@@ -31,7 +37,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 ? "Switch to Light Mode"
                 : "Switch to Dark Mode";
 
-            themeToggle.setAttribute("aria-pressed", String(isDark));
+            themeToggle.setAttribute(
+                "aria-pressed",
+                String(isDark)
+            );
         }
     }
 
@@ -39,18 +48,36 @@ document.addEventListener("DOMContentLoaded", function () {
         updateThemeButton();
 
         themeToggle.addEventListener("click", function () {
-            const isDark = html.getAttribute("data-theme") === "dark";
-            const newTheme = isDark ? "light" : "dark";
+            const currentTheme = html.getAttribute("data-theme");
+            const nextTheme =
+                currentTheme === "dark" ? "light" : "dark";
 
-            html.setAttribute("data-theme", newTheme);
-
-            if (settings) {
-                settings.update({ theme: newTheme });
-            }
+            html.setAttribute("data-theme", nextTheme);
+            settings.update({ theme: nextTheme });
 
             updateThemeButton();
         });
     }
+
+    const visitorNameInput = document.querySelector("#visitor-name");
+
+    if (visitorNameInput) {
+        visitorNameInput.value = settings.get().visitorName;
+
+        visitorNameInput.addEventListener("change", function () {
+            settings.update({
+                visitorName: visitorNameInput.value.trim()
+            });
+        });
+    }
+
+    const previousVisit = settings.get().lastVisit;
+
+    console.log("Previous visit:", previousVisit || "First visit");
+
+    settings.update({
+        lastVisit: new Date().toISOString()
+    });
 
     const projects = [
         {
@@ -73,18 +100,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const projectContainer = document.querySelector("#project-container");
 
     if (projectContainer) {
-        projectContainer.replaceChildren();
-
         const validProjects = projects.filter(function (project) {
-            return (
-                project &&
+            return project &&
                 typeof project.title === "string" &&
                 project.title.trim() !== "" &&
                 typeof project.description === "string" &&
                 project.description.trim() !== "" &&
                 typeof project.category === "string" &&
-                project.category.trim() !== ""
-            );
+                project.category.trim() !== "";
         });
 
         if (validProjects.length === 0) {
@@ -111,111 +134,79 @@ document.addEventListener("DOMContentLoaded", function () {
     const contactForm = document.querySelector("#contact-form");
 
     if (contactForm) {
-        const nameInput = document.querySelector("#name");
-        const emailInput = document.querySelector("#email");
-        const messageInput = document.querySelector("#message");
-
-        const nameError = document.querySelector("#name-error");
-        const emailError = document.querySelector("#email-error");
-        const messageError = document.querySelector("#message-error");
-
         const fields = [
-            { input: nameInput, error: nameError },
-            { input: emailInput, error: emailError },
-            { input: messageInput, error: messageError }
+            {
+                input: document.querySelector("#name"),
+                error: document.querySelector("#name-error"),
+                message: "Please enter your name."
+            },
+            {
+                input: document.querySelector("#email"),
+                error: document.querySelector("#email-error"),
+                message: "Please enter your email address."
+            },
+            {
+                input: document.querySelector("#message"),
+                error: document.querySelector("#message-error"),
+                message: "Please enter your message."
+            }
         ];
 
-        const formIsComplete = fields.every(function (field) {
-            return field.input && field.error;
-        });
+        const formStatus = document.querySelector("#form-status");
 
-        if (formIsComplete) {
+        if (fields.every(function (field) {
+            return field.input && field.error;
+        })) {
             contactForm.addEventListener("submit", function (event) {
                 event.preventDefault();
+
+                let isValid = true;
 
                 fields.forEach(function (field) {
                     field.error.textContent = "";
                     field.input.removeAttribute("aria-invalid");
                 });
 
-                let isValid = true;
-
-                if (nameInput.value.trim() === "") {
-                    nameError.textContent = "Please enter your name.";
-                    nameInput.setAttribute("aria-invalid", "true");
-                    isValid = false;
+                if (formStatus) {
+                    formStatus.textContent = "";
                 }
 
-                const email = emailInput.value.trim();
-                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                fields.forEach(function (field) {
+                    const value = field.input.value.trim();
 
-                if (email === "") {
-                    emailError.textContent =
-                        "Please enter your email address.";
-                    emailInput.setAttribute("aria-invalid", "true");
-                    isValid = false;
-                } else if (!emailPattern.test(email)) {
-                    emailError.textContent =
-                        "Please enter a valid email address.";
-                    emailInput.setAttribute("aria-invalid", "true");
-                    isValid = false;
-                }
+                    if (value === "") {
+                        field.error.textContent = field.message;
+                        field.input.setAttribute("aria-invalid", "true");
+                        isValid = false;
+                    } else if (
+                        field.input.type === "email" &&
+                        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+                    ) {
+                        field.error.textContent =
+                            "Please enter a valid email address.";
 
-                if (messageInput.value.trim() === "") {
-                    messageError.textContent =
-                        "Please enter your message.";
-                    messageInput.setAttribute("aria-invalid", "true");
-                    isValid = false;
-                }
+                        field.input.setAttribute("aria-invalid", "true");
+                        isValid = false;
+                    }
+                });
 
                 if (!isValid) {
-                    const firstInvalid = fields.find(function (field) {
-                        return (
-                            field.input.getAttribute("aria-invalid") === "true"
-                        );
+                    const firstInvalidField = fields.find(function (field) {
+                        return field.input.getAttribute("aria-invalid") === "true";
                     });
 
-                    if (firstInvalid) {
-                        firstInvalid.input.focus();
+                    if (firstInvalidField) {
+                        firstInvalidField.input.focus();
                     }
 
                     return;
                 }
 
-                alert(
-                    "Your information is valid, but your message has not been sent. Please connect a submission service."
-                );
+                if (formStatus) {
+                    formStatus.textContent =
+                        "Your information is valid, but your message has not been sent. Connect a submission service to receive messages.";
+                }
             });
         }
     }
-
-    const visitorNameInput = document.querySelector("#visitor-name");
-    const visitorGreeting = document.querySelector("#visitor-greeting");
-
-    if (visitorNameInput && settings) {
-        const savedSettings = settings.get();
-
-        visitorNameInput.value = savedSettings.visitorName;
-
-        function updateGreeting() {
-            const name = visitorNameInput.value.trim();
-
-            if (visitorGreeting) {
-                visitorGreeting.textContent = name
-                    ? "Welcome back, " + name + "!"
-                    : "Welcome to my portfolio!";
-            }
-        }
-
-        updateGreeting();
-
-        visitorNameInput.addEventListener("input", function () {
-            settings.update({
-                visitorName: visitorNameInput.value
-            });
-
-            updateGreeting();
-        });
-    }
-
 });

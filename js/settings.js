@@ -64,17 +64,14 @@
         }
     }
 
-    // Apply the saved theme before the page is rendered.
     document.documentElement.setAttribute(
         "data-theme",
         settings.theme
     );
 
-    // Record this visit while retaining the other settings.
     settings.lastVisit = new Date().toISOString();
     saveSettings();
 
-    // Share settings functions with the other JavaScript file.
     window.portfolioSettings = {
         get() {
             return { ...settings };

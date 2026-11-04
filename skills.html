@@ -1,69 +1,50 @@
-<!DOCTYPE html>
-<html lang='en'>
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skills | Styx Amarillo</title>
-    <script src="js/settings.js"></script>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/settings.js"></script>
     <script src="js/script.js" defer></script>
 </head>
+<body>
+    <div class="site-controls">
+        <button id="theme-toggle" type="button" aria-pressed="false">Switch to Dark Mode</button>
+        <button id="menu-button" type="button" aria-expanded="false" aria-controls="navigation-menu">Menu</button>
+    </div>
 
-    <body>
-    <button id="theme-toggle" type="button">
-        Switch to Dark Mode
-    </button>
-    <button id="menu-button" type="button" aria-expanded="false" aria-controls="navigation-menu">
-                Menu
-    </button>
+    <nav id="navigation-menu" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="skills.html" aria-current="page">Skills</a>
+        <a href="contact.html">Contact</a>
+    </nav>
 
-            <nav id="navigation-menu">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="skills.html">Skills</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-            
-        <main>
-        <header>
-            <h1>My Skills</h1>
-        </header>
-            <section>
-                <h1>Skills and Expertise</h1>
-                <div class ="table-wrapper">
-
-                   <table>
+    <main>
+        <header><h1>My Skills</h1></header>
+        <section>
+            <h2>Skills and Expertise</h2>
+            <div class="table-wrapper">
+                <table>
                     <caption>My Skills</caption>
                     <thead>
                         <tr>
-                            <th scope ="col">Skill</th>
-                            <th scope ="col">Proficiency</th>
+                            <th scope="col">Skill</th>
+                            <th scope="col">Proficiency</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope ="col">HTML</th>
-                            <td>Intermediate</td>
-                        </tr>
-                        <tr>
-                            <th scope ="col">CSS</th>
-                            <td>Intermediate</td>
-                        </tr>
-                        <tr>
-                            <th scope ="col">JavaScript</th>
-                            <td>Beginner</td>
-                        </tr>
-                        <tr>
-                            <th scope ="col">Adobe Photoshop</th>
-                            <td>Intermediate</td>
-                        </tr>
-                   </table>
-                </div>
-            </section>
-        <footer> 
-            @2026 Styx Amarillo
-
-        </footer>
-        </main>
-    </body>
+                        <tr><th scope="row">HTML</th><td>Intermediate</td></tr>
+                        <tr><th scope="row">CSS</th><td>Intermediate</td></tr>
+                        <tr><th scope="row">JavaScript</th><td>Beginner</td></tr>
+                        <tr><th scope="row">Adobe Photoshop</th><td>Intermediate</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <footer><p>© 2026 Styx Amarillo</p></footer>
+    </main>
+</body>
+</html>

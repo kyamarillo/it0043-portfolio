@@ -1,49 +1,68 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>home | Styx Amarillo</title>
-    <script src="js/settings.js"></script>
+    <title>Home | Styx Amarillo</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/settings.js"></script>
     <script src="js/script.js" defer></script>
 </head>
+<body>
+    <div class="site-controls">
+        <button id="theme-toggle" type="button" aria-pressed="false">
+            Switch to Dark Mode
+        </button>
 
-    <body>
-     <button id="theme-toggle" type="button">
-        Switch to Dark Mode
-    </button>
-    <button id="menu-button" type="button" aria-expanded="false" aria-controls="navigation-menu">
-                Menu
-    </button>
+        <button id="menu-button" type="button"
+            aria-expanded="false" aria-controls="navigation-menu">
+            Menu
+        </button>
+    </div>
 
-            <nav id="navigation-menu">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="skills.html">Skills</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-            
-        <main>
+    <nav id="navigation-menu" aria-label="Main navigation">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="about.html">About</a>
+        <a href="skills.html">Skills</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <main>
         <header>
             <h1>Welcome to my Portfolio</h1>
-        </header>  
-                 <section>
-                        <h2>Welcome to my Web Designing Portfolio Website</h2>
-                            <article>
-                            <h2>About Me:</h2>
-                            <p>My name is Styx Amarillo. I am a student at the FEU Institute of Technology. I am currently pursuing a degree in Multimedia Arts specialized in Filming and Animation. I have a passion for creating visually appealing and user-friendly websites. I am constantly learning new technologies and techniques to improve my skills and stay up-to-date with the latest trends in web design.</p>
-                                <aside>
-                            <h1>Note:</h1>
-                            <p>This is the testing website. for my assignments. You can explore my work by navigating through the links below.</p>
-                                </aside>
-            <section id="project-container"></section>
-                    <footer>
-                     <p>@2026 Amarillo Portfolio</p>
+        </header>
 
-                    </footer>
-        </main>
-        </body>
+        <section>
+            <h2>Welcome to my Web Designing Portfolio Website</h2>
+
+            <article>
+                <h2>About Me</h2>
+                <p>My name is Styx Amarillo. I am a student at the FEU Institute of Technology, pursuing Multimedia Arts specializing in Filming and Animation. I enjoy creating visually appealing and user-friendly websites.</p>
+            </article>
+        </section>
+
+        <section>
+            <h2>Personalize Your Visit</h2>
+            <label for="visitor-name">Your name</label>
+            <input id="visitor-name" name="visitor-name"
+                type="text" autocomplete="given-name"
+                placeholder="Enter your name">
+        </section>
+
+        <aside class="note">
+            <h2>Note</h2>
+            <p>This is a testing website for my assignments. Explore my work through the navigation links above.</p>
+        </aside>
+
+        <section>
+            <h2>My Projects</h2>
+            <div id="project-container" class="project-grid"></div>
+        </section>
+
+        <footer>
+            <p>© 2026 Styx Amarillo</p>
+        </footer>
+    </main>
+</body>
 </html>

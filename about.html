@@ -1,43 +1,36 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>about | Styx Amarillo</title>
-    <script src="js/settings.js"></script>
+    <title>About | Styx Amarillo</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/settings.js"></script>
     <script src="js/script.js" defer></script>
 </head>
-    <body>
-    <button id="theme-toggle" type="button">
-    Switch to Dark Mode
-    </button>
-    <button id="menu-button" type="button" aria-expanded="false" aria-controls="navigation-menu">
-                Menu
-    </button>
+<body>
+    <div class="site-controls">
+        <button id="theme-toggle" type="button" aria-pressed="false">Switch to Dark Mode</button>
+        <button id="menu-button" type="button" aria-expanded="false" aria-controls="navigation-menu">Menu</button>
+    </div>
 
-            <nav id="navigation-menu">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="skills.html">Skills</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-            
-        <main>
-         <header>
-            <h1>About Me</h1>
-        </header>
-            <section>
-                <h2> Who am I?</h2>
-                <article>
-                    <p>My name is Styx Amarillo. I am a student at the University of Advancing Technology. I am currently pursuing a degree in Web Design and Development. I have a passion for creating visually appealing and user-friendly websites. I am constantly learning new technologies and techniques to improve my skills and stay up-to-date with the latest trends in web design.</p>
-                </article>
-            </section>
-        <footer> 
-            @2026 Styx Amarillo
+    <nav id="navigation-menu" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html" aria-current="page">About</a>
+        <a href="skills.html">Skills</a>
+        <a href="contact.html">Contact</a>
+    </nav>
 
-        </footer>
-        </main>
-    </body>
+    <main>
+        <header><h1>About Me</h1></header>
+        <section>
+            <h2>Who am I?</h2>
+            <article>
+                <p>My name is Styx Amarillo. I am a student at the FEU Institute of Technology, pursuing a degree in Multimedia Arts specializing in Filming and Animation. I enjoy creating visually appealing and user-friendly websites while improving my creative and technical skills.</p>
+            </article>
+        </section>
+        <footer><p>© 2026 Styx Amarillo</p></footer>
+    </main>
+</body>
 </html>
