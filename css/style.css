@@ -1,3 +1,4 @@
+
 :root {
     color-scheme: light;
 
@@ -80,12 +81,34 @@ p {
     overflow-wrap: anywhere;
 }
 
+.site-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding: var(--space-3) clamp(1rem, 4vw, 2rem) 0;
+}
+
+button {
+    font: inherit;
+    padding: var(--space-2) var(--space-3);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-small);
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--color-hover);
+}
+
 nav {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
 }
 
 #navigation-menu {
@@ -98,84 +121,45 @@ nav {
     align-items: stretch;
 }
 
-#menu-button {
-    padding: var(--space-2) var(--space-3);
-    background-color: var(--color-surface);
-    color: var(--color-text);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-small);
-    cursor: pointer;
-}
-
-nav a[href="#home"],
-nav a[href="#contact"],
-nav a[href="#about"],
-nav a[href="#skills"] {
-  display: none;
-}
-
 nav a {
     display: inline-block;
     padding: var(--space-2) var(--space-3);
     color: var(--color-accent);
     text-decoration: none;
     border-radius: var(--radius-small);
-    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-nav a:hover {
+nav a:hover,
+nav a[aria-current="page"] {
     color: var(--color-accent-hover);
     background-color: var(--color-hover);
 }
 
 nav a:focus-visible,
-.button:focus-visible,
-button:focus-visible {
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 3px;
 }
 
+.note,
 .card {
     background-color: var(--color-surface);
     padding: var(--space-4);
     margin-bottom: var(--space-4);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-medium);
-    transition: background-color 0.25s ease;
 }
 
-.button {
-    display: inline-block;
-    padding: var(--space-2) var(--space-4);
-    background-color: var(--color-accent);
-    color: var(--color-button-text);
-    text-decoration: none;
-    border: none;
-    border-radius: var(--radius-small);
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+.project-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
 }
 
-.button:hover {
-    background-color: var(--color-accent-hover);
-}
-
-button {
-    font: inherit;
-}
-
-#theme-toggle {
-    padding: var(--space-2) var(--space-3);
-    background-color: var(--color-surface);
-    color: var(--color-text);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-small);
-    cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-#theme-toggle:hover {
-    background-color: var(--color-hover);
+.card {
+    margin-bottom: 0;
 }
 
 .table-wrapper {
@@ -208,12 +192,48 @@ th {
     color: var(--color-accent);
 }
 
+form {
+    display: grid;
+    gap: var(--space-3);
+    max-width: 650px;
+    margin-top: var(--space-4);
+}
+
+.form-field {
+    display: grid;
+    gap: var(--space-1);
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: var(--space-2) var(--space-3);
+    font: inherit;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-small);
+}
+
+.field-error {
+    color: #DC2626;
+}
+
+[aria-invalid="true"] {
+    border-color: #DC2626;
+}
+
 footer {
+    margin-top: var(--space-5);
     padding: var(--space-4);
     text-align: center;
     color: var(--color-muted);
     background-color: var(--color-surface);
     border-top: 1px solid var(--color-border);
+}
+
+footer p {
+    margin: 0;
 }
 
 @media (max-width: 600px) {
@@ -224,7 +244,6 @@ footer {
     nav {
         flex-direction: column;
         align-items: stretch;
-        padding: var(--space-2);
     }
 
     nav a {
@@ -232,6 +251,7 @@ footer {
         text-align: center;
     }
 
+    .note,
     .card {
         padding: var(--space-3);
     }
@@ -252,30 +272,24 @@ footer {
         padding: var(--space-4);
     }
 
-    nav {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .card {
-        padding: 1.25rem;
+    .project-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
 @media (min-width: 901px) {
-     #navigation-menu {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    }
-
-    nav {
+    #navigation-menu {
+        display: flex;
         flex-direction: row;
         justify-content: flex-start;
     }
 
-    .card {
-        padding: var(--space-4);
+    nav {
+        justify-content: flex-start;
+    }
+
+    .project-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }
 

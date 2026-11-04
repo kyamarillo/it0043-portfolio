@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (menuButton && navigationMenu) {
         menuButton.addEventListener("click", function () {
             const isOpen = navigationMenu.classList.toggle("show");
+
             menuButton.setAttribute("aria-expanded", String(isOpen));
         });
 
@@ -20,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const themeToggle = document.querySelector("#theme-toggle");
     const html = document.documentElement;
+    const settings = window.portfolioSettings;
 
     function updateThemeButton() {
         const isDark = html.getAttribute("data-theme") === "dark";
@@ -34,23 +36,20 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (themeToggle) {
-            themeToggle.addEventListener("click", function () {
+        updateThemeButton();
+
+        themeToggle.addEventListener("click", function () {
             const isDark = html.getAttribute("data-theme") === "dark";
+            const newTheme = isDark ? "light" : "dark";
 
-            if (isDark) {
-             html.removeAttribute("data-theme");
-            localStorage.setItem("theme", "light");
-    } 
-    else 
-    {
-        html.setAttribute("data-theme", "dark");
-        localStorage.setItem("theme", "dark");
-    }
+            html.setAttribute("data-theme", newTheme);
 
-        updateThemeButton();
+            if (settings) {
+                settings.update({ theme: newTheme });
+            }
+
+            updateThemeButton();
         });
-
-        updateThemeButton();
     }
 
     const projects = [
@@ -92,25 +91,19 @@ document.addEventListener("DOMContentLoaded", function () {
             projectContainer.textContent = "No projects available yet.";
         } else {
             validProjects.forEach(function (project) {
-                const projectCard = document.createElement("article");
-                const projectTitle = document.createElement("h3");
-                const projectDescription = document.createElement("p");
-                const projectCategory = document.createElement("p");
+                const card = document.createElement("article");
+                const title = document.createElement("h3");
+                const description = document.createElement("p");
+                const category = document.createElement("p");
 
-                projectCard.classList.add("card");
+                card.classList.add("card");
 
-                projectTitle.textContent = project.title;
-                projectDescription.textContent = project.description;
-                projectCategory.textContent =
-                    "Category: " + project.category;
+                title.textContent = project.title;
+                description.textContent = project.description;
+                category.textContent = "Category: " + project.category;
 
-                projectCard.append(
-                    projectTitle,
-                    projectDescription,
-                    projectCategory
-                );
-
-                projectContainer.appendChild(projectCard);
+                card.append(title, description, category);
+                projectContainer.appendChild(card);
             });
         }
     }
@@ -132,14 +125,13 @@ document.addEventListener("DOMContentLoaded", function () {
             { input: messageInput, error: messageError }
         ];
 
-        const formElementsExist = fields.every(function (field) {
+        const formIsComplete = fields.every(function (field) {
             return field.input && field.error;
         });
 
-        if (formElementsExist) {
+        if (formIsComplete) {
             contactForm.addEventListener("submit", function (event) {
                 event.preventDefault();
-
 
                 fields.forEach(function (field) {
                     field.error.textContent = "";
@@ -154,14 +146,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     isValid = false;
                 }
 
-                const emailValue = emailInput.value.trim();
+                const email = emailInput.value.trim();
                 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-                if (emailValue === "") {
-                    emailError.textContent = "Please enter your email address.";
+                if (email === "") {
+                    emailError.textContent =
+                        "Please enter your email address.";
                     emailInput.setAttribute("aria-invalid", "true");
                     isValid = false;
-                } else if (!emailPattern.test(emailValue)) {
+                } else if (!emailPattern.test(email)) {
                     emailError.textContent =
                         "Please enter a valid email address.";
                     emailInput.setAttribute("aria-invalid", "true");
@@ -169,18 +162,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
                 if (messageInput.value.trim() === "") {
-                    messageError.textContent = "Please enter your message.";
+                    messageError.textContent =
+                        "Please enter your message.";
                     messageInput.setAttribute("aria-invalid", "true");
                     isValid = false;
                 }
 
                 if (!isValid) {
-                    const firstInvalidField = fields.find(function (field) {
-                        return field.input.getAttribute("aria-invalid") === "true";
+                    const firstInvalid = fields.find(function (field) {
+                        return (
+                            field.input.getAttribute("aria-invalid") === "true"
+                        );
                     });
 
-                    if (firstInvalidField) {
-                        firstInvalidField.input.focus();
+                    if (firstInvalid) {
+                        firstInvalid.input.focus();
                     }
 
                     return;
@@ -191,6 +187,35 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
             });
         }
+    }
+
+    const visitorNameInput = document.querySelector("#visitor-name");
+    const visitorGreeting = document.querySelector("#visitor-greeting");
+
+    if (visitorNameInput && settings) {
+        const savedSettings = settings.get();
+
+        visitorNameInput.value = savedSettings.visitorName;
+
+        function updateGreeting() {
+            const name = visitorNameInput.value.trim();
+
+            if (visitorGreeting) {
+                visitorGreeting.textContent = name
+                    ? "Welcome back, " + name + "!"
+                    : "Welcome to my portfolio!";
+            }
+        }
+
+        updateGreeting();
+
+        visitorNameInput.addEventListener("input", function () {
+            settings.update({
+                visitorName: visitorNameInput.value
+            });
+
+            updateGreeting();
+        });
     }
 
 });
