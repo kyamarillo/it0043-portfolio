@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The creative portfolio of Styx Amarillo, a Multimedia Arts student specializing in Filming and Animation.">
+    <title>Web Design Portfolio</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/settings.js"></script>
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-profile">
+            <h2>Kirsten Charles Angelo Y. Amarillo</h2>
+            <p>Multimedia Arts Student</p>
+        </div>
+
+        <button
+            class="menu-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="navigation-menu">
+            Menu
+        </button>
+
+        <nav id="navigation-menu" aria-label="Main navigation">
+            <a href="#home" class="nav-link" aria-current="location">Home</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#skills" class="nav-link">Skills</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+
+        <div class="sidebar-controls">
+            <button id="theme-toggle" type="button" aria-pressed="false">
+                Switch to Dark Mode
+            </button>
+        </div>
+
+        <footer class="sidebar-footer">
+            <p>© 2026 Web Design Portfolio</p>
+        </footer>
+    </aside>
+
+    <main class="main-content">
+        <section id="home" class="content-section">
+            <header>
+                <h1>WELCOME TO MY PORTFOLIO</h1>
+                <p>Welcome to my Web Designing Portfolio Website. Explore my creativity, projects, and skills.</p>
+            </header>
+
+            <article>
+                <h2>About Me</h2>
+                <p>
+                    My name is Styx Amarillo. I am a student at the FEU Institute of Technology,
+                    pursuing Multimedia Arts specializing in Filming and Animation. I enjoy
+                    exploring visual storytelling through illustration, graphic design,
+                    animation, and digital media.
+                </p>
+            </article>
+
+            <div class="personalize">
+                <h2>Personalize Your Visit</h2>
+                <label for="visitor-name">Your name</label>
+                <input
+                    id="visitor-name"
+                    name="visitor-name"
+                    type="text"
+                    autocomplete="given-name"
+                    placeholder="Enter your name">
+                <p id="visitor-greeting" class="visitor-greeting" aria-live="polite"></p>
+            </div>
+
+            <aside class="note">
+                <h2>Note</h2>
+                <p>This is a testing website for my assignments. Explore my work through the navigation links.</p>
+            </aside>
+        </section>
+
+        <section id="about" class="content-section">
+            <header><h1>ABOUT ME</h1></header>
+            <article>
+                <h2>Who am I?</h2>
+                <p>
+                    My name is Styx Amarillo. I am a student at the FEU Institute of Technology,
+                    pursuing a degree in Multimedia Arts specializing in Filming and Animation.
+                </p>
+                <p>
+                    I enjoy creating visually appealing and user-friendly websites while
+                    improving my creative and technical skills.
+                </p>
+            </article>
+        </section>
+
+                <section id="portfolio" class="content-section">
+            <header>
+                <h1>MY PORTFOLIO</h1>
+                <p>
+                    A collection of visual experiments, illustration, poster design,
+                    and advertising artwork. Each piece reflects my interest in
+                    storytelling, composition, color, and visual communication.
+                </p>
+            </header>
+            <div id="project-container" class="project-grid" aria-live="polite"></div>
+        </section>
+
+        <section id="skills" class="content-section">
+            <header><h1>SKILLS</h1></header>
+            <article>
+                <h2>Skills and Expertise</h2>
+                <p>
+                    My current skills combine web development fundamentals with
+                    visual design and multimedia practice. Proficiency levels reflect
+                    my current learning and experience.
+                </p>
+                <div class="table-wrapper">
+                    <table>
+                        <caption>Skills, Tools, and Current Proficiency</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Skill Area</th>
+                                <th scope="col">Skill / Tool</th>
+                                <th scope="col">Proficiency</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="rowgroup" rowspan="3">Web Development</th>
+                                <td>HTML</td>
+                                <td>Beginner</td>
+                            </tr>
+                            <tr>
+                                <td>CSS</td>
+                                <td>Beginner</td>
+                            </tr>
+                            <tr>
+                                <td>JavaScript</td>
+                                <td>Beginner</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="rowgroup" rowspan="3">Digital Design</th>
+                                <td>Adobe Photoshop</td>
+                                <td>Intermediate</td>
+                            </tr>
+                            <tr>
+                                <td>Digital Illustration</td>
+                                <td>Learning</td>
+                            </tr>
+                            <tr>
+                                <td>Adobe Illustrator</td>
+                                <td>Intermediate</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="rowgroup" rowspan="3">Visual Communication</th>
+                                <td>Poster Design and Layout</td>
+                                <td>Developing</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+        </section>
+
+        <section id="contact" class="content-section">
+            <header><h1>CONTACT</h1></header>
+            <article>
+                <h2>Get in Touch</h2>
+                <p>
+                    If you would like to get in touch, feel free to reach out by email.
+                    I am open to discussing projects, creative ideas, or opportunities.
+                </p>
+                <p>
+                    Email:
+                    <a href="mailto:kyamarillo@fit.edu.ph">kyamarillo@fit.edu.ph</a>
+                </p>
+
+                <form id="contact-form" novalidate>
+                    <div class="form-field">
+                        <label for="name">Name</label>
+                        <input id="name" name="name" type="text" autocomplete="name"
+                               required aria-describedby="name-error">
+                        <span id="name-error" class="field-error"></span>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" autocomplete="email"
+                               required aria-describedby="email-error">
+                        <span id="email-error" class="field-error"></span>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5"
+                                  required aria-describedby="message-error"></textarea>
+                        <span id="message-error" class="field-error"></span>
+                    </div>
+
+                    <button type="submit">Submit</button>
+                    <p id="form-status" role="status" aria-live="polite"></p>
+                </form>
+            </article>
+        </section>
+
+        <footer class="main-footer">
+            <p>© 2026 Web Design Portfolio. All Rights Reserved.</p>
+        </footer>
+    </main>
+</body>
+</html>
