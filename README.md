@@ -33,6 +33,9 @@ it0043-Portfolio/
 |-contact.html
 |
 |-assets/
+|   |-batman-poster.jpg
+|   |-moonlit.landscape.jpg
+|   |-royal-orange-ad.jpg
 |
 |-css/
 |  |-style.css
